@@ -16,7 +16,7 @@ const Dashboard = () => {
     const fetchTask = async () => {
       const token = localStorage.getItem("token")
       if (!token) { window.location.href = "/"; }
-      const res = await axios.get(`http://localhost:5000/api/tasks/?page=${page}&search=${search}&status=${filter}`, {
+      const res = await axios.get(`https://task-flow-ai0s.onrender.com/api/tasks/?page=${page}&search=${search}&status=${filter}`, {
         headers: {
           "token": localStorage.getItem("token")
         }
@@ -30,7 +30,7 @@ const Dashboard = () => {
 
   const handleClick = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/api/tasks/", form, {
+      const res = await axios.post("https://task-flow-ai0s.onrender.com/api/tasks/", form, {
         headers: {
           "token": localStorage.getItem("token")
         }
@@ -44,7 +44,7 @@ const Dashboard = () => {
   }
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/tasks/${id}`, {
+      await axios.delete(`https://task-flow-ai0s.onrender.com/api/tasks/${id}`, {
         headers: {
           "token": localStorage.getItem("token")
         }
@@ -56,7 +56,7 @@ const Dashboard = () => {
   }
   const handleUpdate = async (id, currentStatus) => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/tasks/${id}`, {
+      const res = await axios.put(`https://task-flow-ai0s.onrender.com/api/tasks/${id}`, {
         status: currentStatus === "completed" ? "pending" : "completed"
       }, {
         headers: {
@@ -77,7 +77,7 @@ const Dashboard = () => {
   }
   const handleUpdateTask = async () => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/tasks/${editId}`, form, {
+      const res = await axios.put(`https://task-flow-ai0s.onrender.com/api/tasks/${editId}`, form, {
         headers: {
           "token": localStorage.getItem("token")
         }

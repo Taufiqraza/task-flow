@@ -11,7 +11,7 @@ const Register = () => {
   const [isSucess, setIsSuccess] = useState(false);
   const handleRegister = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/register", form);
+      const res = await axios.post("https://task-flow-ai0s.onrender.com/api/auth/register", form);
       console.log(res);
       setMsg(res.data.message);
       setIsSuccess(true)
