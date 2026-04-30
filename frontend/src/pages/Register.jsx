@@ -13,8 +13,14 @@ const Register = () => {
     if (!form.name.trim()) return "Name is required";
 
     const nameRegex = /^[A-Za-z\s]+$/;
-    if (!nameRegex.test(form.name))
+    if (!nameRegex.test(form.name)){
+            setForm({
+        ...form,name:""
+      })
       return "Name should contain only alphabets";
+
+    }
+      
 
     if (!form.email.trim()) return "Email is required";
 
