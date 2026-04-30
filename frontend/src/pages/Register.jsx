@@ -9,15 +9,34 @@ const Register = () => {
   })
   const [msg, setMsg] = useState("")
   const [isSucess, setIsSuccess] = useState(false);
+  const validateForm = () => {
+    if (!form.name.trim()) return "Name is required";
+
+    const nameRegex = /^[A-Za-z\s]+$/;
+    if (!nameRegex.test(form.name))
+      return "Name should contain only alphabets";
+
+    if (!form.email.trim()) return "Email is required";
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(form.email)) return "Invalid email format";
+
+    if (!form.password) return "Password is required";
+
+    if (form.password.length < 6)
+      return "Password must be at least 6 characters";
+
+    return null; // no error
+  };
   const handleRegister = async () => {
+    const error = validateForm();
+    if (error) {
+      setMsg(error);
+
+      setTimeout(() => setMsg(""), 2000);
+      return;
+    }
     try {
-      if (!form.name || !form.email || !form.password) {
-        setMsg("All fields are required");
-        setTimeout(() => {
-          setMsg("");
-        }, 2000);
-        return;
-      }
       const res = await axios.post("https://task-flow-ai0s.onrender.com/api/auth/register", form);
       console.log(res);
       setMsg(res.data.message);
