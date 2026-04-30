@@ -11,15 +11,23 @@ const Register = () => {
   const [isSucess, setIsSuccess] = useState(false);
   const handleRegister = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/api/auth/register", form);
+      if (!form.name || !form.email || !form.password) {
+        setMsg("All fields are required");
+        setTimeout(() => {
+          setMsg("");
+        }, 2000);
+        return;
+      }
+      const res = await axios.post("https://task-flow-ai0s.onrender.com/api/auth/register", form);
       console.log(res);
       setMsg(res.data.message);
+      console.log(res.data.message);
       setIsSuccess(true)
       setTimeout(() => {
-        window.location.href = "/dashboard";
+        window.location.href = "/";
       }, 2000)
     } catch (error) {
-      setMsg(error.response?.data?.message || "Registration Failed")
+      console.log(error.response?.data?.message || "Registration Failed")
       setIsSuccess(false)
     }
   }
@@ -105,7 +113,7 @@ const Register = () => {
                   type="submit"
                   className="w-full text-white bg-blue-600 hover:bg-blue-700 
                     focus:ring-4 focus:outline-none focus:ring-blue-300 
-                    font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                    font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-pointer"
                 >
                   Create an account
                 </button>

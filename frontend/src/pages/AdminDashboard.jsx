@@ -15,7 +15,7 @@ const AdminDashboard = () => {
   const [filter, setFilter] = useState("");
   const fetchStats = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/admin/stats", {
+      const res = await axios.get("https://task-flow-ai0s.onrender.com/api/admin/stats", {
         headers: {
           token: localStorage.getItem("token")
         }
@@ -27,7 +27,7 @@ const AdminDashboard = () => {
   }
   const fetchAdminData = async () => {
     try {
-      const res = await axios.get(`http://localhost:5000/api/admin/tasks?page=${page}&search=${search}&status=${filter}`, {
+      const res = await axios.get(`https://task-flow-ai0s.onrender.com/api/admin/tasks?page=${page}&search=${search}&status=${filter}`, {
         headers: {
           "token": localStorage.getItem("token")
         }
@@ -41,7 +41,7 @@ const AdminDashboard = () => {
   }
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/admin/tasks/${id}`, {
+      await axios.delete(`https://task-flow-ai0s.onrender.com/api/admin/tasks/${id}`, {
         headers: {
           "token": localStorage.getItem("token")
         }
